@@ -1,0 +1,6 @@
+BK-1001, C001, Nguyen Van An, 0901234567, an.nguyen@mail.com, A0, 2026-10-18 14:30:00
+BK-1002, C002, Tran Thi Binh, 0912345678, binh.tran@mail.com, A1, 2026-10-18 14:32:10
+BK-1003, C003, Le Hoang Cuong, 0987654321, cuong.le@mail.com, C4, 2026-10-18 14:35:45
+BK-1004, C004, Pham Minh Duc, 0933333333, duc.pham@mail.com, F9, 2026-10-18 14:41:05
+BK-1005, C005, Do Thu Ha, 0944444444, ha.do@mail.com, A0, 2026-10-18 14:50:00
+BK-1006, C006, Loi Du Lieu, 12345, khong-phai-email, G9, 2026-10-18 14:55:00
