@@ -5,6 +5,7 @@ import file.WaitingListFileHelper;
 import java.util.List;
 import model.Booking;
 import model.Customer;
+import utils.CinemaValidator;
 
 /**
  * Lop CinemaController dieu phoi toan bo nghiep vu he thong dat ve (giong EmployeeController trong Lab 3).
@@ -92,8 +93,7 @@ public class CinemaController {
      * Goi y: return hall.isFull().
      */
     public boolean isHallFull() {
-        // TODO: cai dat kiem tra rap day
-        throw new UnsupportedOperationException("TODO: CinemaController.isHallFull chua duoc cai dat.");
+        return hall.isFull();
     }
 
     /**
@@ -160,8 +160,17 @@ public class CinemaController {
      *  4. changed = true; tra ve vi tri = waitingList.size().
      */
     public String joinWaitingList(Customer customer) {
-        // TODO: cai dat vao hang cho
-        throw new UnsupportedOperationException("TODO: CinemaController.joinWaitingList chua duoc cai dat.");
+        if (!CinemaValidator.isValidCustomer(customer)) {
+            return "Failed: customer information is invalid.";
+        }
+        if (!hall.isFull()) {
+            return "Failed: seats are still available. Please book a seat instead of joining the waiting list.";
+        }
+        if (!waitingList.enqueue(customer)) {
+            return "Failed: customer " + customer.getCustomerId() + " is already in the waiting list.";
+        }
+        changed = true;
+        return "Added " + customer.getName() + " to the waiting list. Position: " + waitingList.size() + ".";
     }
 
     /**
@@ -170,8 +179,7 @@ public class CinemaController {
      * Goi y: return waitingList.getAll().
      */
     public List<Customer> getWaitingList() {
-        // TODO: cai dat lay danh sach hang cho
-        throw new UnsupportedOperationException("TODO: CinemaController.getWaitingList chua duoc cai dat.");
+        return waitingList.getAll();
     }
 
     /**
@@ -219,8 +227,7 @@ public class CinemaController {
      * Lay so khach dang cho trong hang cho.
      */
     public int getWaitingCount() {
-        // TODO: cai dat dem khach dang cho
-        throw new UnsupportedOperationException("TODO: CinemaController.getWaitingCount chua duoc cai dat.");
+        return waitingList.size();
     }
 
     /**

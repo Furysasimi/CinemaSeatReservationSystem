@@ -1,5 +1,6 @@
 package manager;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -12,7 +13,7 @@ import model.Customer;
  * QUY TAC: hang cho chi co nguoi khi rap da het ghe. Moi lan co ghe duoc tra lai
  * thi nguoi o DAU hang cho duoc giao ghe do ngay (viec nay do CinemaController dieu phoi).
  *
- * TRANG THAI: KHUNG TRONG - cac phuong thuc ben duoi can duoc cai dat.
+ * TRANG THAI: DA CAI DAT.
  */
 public class WaitingListManager {
 
@@ -33,8 +34,13 @@ public class WaitingListManager {
      * Do phuc tap: O(N) vi phai kiem tra trung ma.
      */
     public boolean enqueue(Customer customer) {
-        // TODO: cai dat them vao hang cho
-        throw new UnsupportedOperationException("TODO: WaitingListManager.enqueue chua duoc cai dat.");
+        if (customer == null || customer.getCustomerId() == null) {
+            return false;
+        }
+        if (contains(customer.getCustomerId())) {
+            return false;
+        }
+        return waitingQueue.offer(customer);
     }
 
     /**
@@ -45,8 +51,7 @@ public class WaitingListManager {
      * Do phuc tap: O(1).
      */
     public Customer dequeue() {
-        // TODO: cai dat lay khach dau hang
-        throw new UnsupportedOperationException("TODO: WaitingListManager.dequeue chua duoc cai dat.");
+        return waitingQueue.poll();
     }
 
     /**
@@ -56,24 +61,21 @@ public class WaitingListManager {
      * Do phuc tap: O(1).
      */
     public Customer peek() {
-        // TODO: cai dat xem khach dau hang
-        throw new UnsupportedOperationException("TODO: WaitingListManager.peek chua duoc cai dat.");
+        return waitingQueue.peek();
     }
 
     /**
      * Kiem tra hang cho co rong hay khong.
      */
     public boolean isEmpty() {
-        // TODO: cai dat kiem tra rong
-        throw new UnsupportedOperationException("TODO: WaitingListManager.isEmpty chua duoc cai dat.");
+        return waitingQueue.isEmpty();
     }
 
     /**
      * Lay so khach dang cho.
      */
     public int size() {
-        // TODO: cai dat dem so khach cho
-        throw new UnsupportedOperationException("TODO: WaitingListManager.size chua duoc cai dat.");
+        return waitingQueue.size();
     }
 
     /**
@@ -83,8 +85,15 @@ public class WaitingListManager {
      * Do phuc tap: O(N).
      */
     public boolean contains(String customerId) {
-        // TODO: cai dat kiem tra khach da trong hang cho
-        throw new UnsupportedOperationException("TODO: WaitingListManager.contains chua duoc cai dat.");
+        if (customerId == null) {
+            return false;
+        }
+        for (Customer c : waitingQueue) {
+            if (customerId.equalsIgnoreCase(c.getCustomerId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -94,15 +103,13 @@ public class WaitingListManager {
      * Goi y: new ArrayList<>(waitingQueue) (LinkedList giu thu tu them vao).
      */
     public List<Customer> getAll() {
-        // TODO: cai dat lay danh sach hang cho
-        throw new UnsupportedOperationException("TODO: WaitingListManager.getAll chua duoc cai dat.");
+        return new ArrayList<>(waitingQueue);
     }
 
     /**
      * Xoa toan bo hang cho (dung truoc khi load file).
      */
     public void clear() {
-        // TODO: cai dat xoa hang cho
-        throw new UnsupportedOperationException("TODO: WaitingListManager.clear chua duoc cai dat.");
+        waitingQueue.clear();
     }
 }
